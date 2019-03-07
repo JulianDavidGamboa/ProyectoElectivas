@@ -1,0 +1,78 @@
+<% include ../partials/navigation %> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Iniciar Sesion</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <style>
+        body {
+            background: #6441A5;  /* fallback for old browsers */
+           background: -webkit-linear-gradient(to right, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
+           background: linear-gradient(to right, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .card{
+            background-color: #212F3D;
+        }
+        .footer{
+            background-color: #212F3D;
+        }
+        nav.navbar {
+            background-color: #212F3D;
+        }
+        li:hover {
+            color: blue;
+        }
+    </style>
+</head>
+<body style="">
+    
+    <div class="container p-5 mt-5">
+        <div class="col-md-4 mx-auto text-center text-light">
+            <% if(mensajeIngreso.length > 0) { %>
+
+                <div class="alert alert-danger font-weight-bold" role="alert">
+
+                    <%= mensajeIngreso %>
+                
+                </div>
+
+            <% } %>
+            <% if(mensajeSalida.length > 0) { %>
+
+                <div class="alert alert-info font-weight-bold" role="alert">
+                    
+                    <%= mensajeSalida %>
+                
+                </div>            
+            <% } %>
+            <div class="card">
+                <form action="/" method="POST">
+                    <div class="card-heander">
+                        <h3>Iniciar Sesión</h3>
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                <input type="text" name="correo" placeholder="Correo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="contraseña" placeholder="Contraseña" class="form-control">
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block font-weight-bold border-0" style="background-color: #6C3483">Iniciar Sesión</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>

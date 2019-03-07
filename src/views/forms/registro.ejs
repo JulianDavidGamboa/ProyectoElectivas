@@ -1,0 +1,85 @@
+<% include ../partials/navigation %> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+
+    <style>
+        body {
+            background: #6441A5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #2a0845, #6441A5);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #2a0845, #6441A5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .card{
+            background-color: #212F3D;
+        }
+        .footer{
+            background-color: #212F3D;
+        }
+        nav.navbar {
+            background-color: #212F3D;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container p-5 mt-5">
+        <div class="col-md-4 mx-auto text-center text-light">
+            <% if(mensajeRegistro.length > 0) { %>
+
+                <div class="alert alert-danger font-weight-bold" role="alert">
+                    <%= mensajeRegistro %>
+                </div>
+
+            <% } %>
+            <% if(mensajeError.length > 0) { %>
+
+                <div class="alert alert-danger font-weight-bold" role="alert">
+                    <%= mensajeError %>
+                </div>
+
+            <% } %>
+            <% if(mensajeSalida.length > 0) { %>
+
+                <div class="alert alert-info font-weight-bold" role="alert">
+                    
+                    <%= mensajeSalida %>
+                
+                </div>            
+            <% } %>
+            <div class="card">
+                <form action="/registro" method="POST">
+                <div class="card-heander">
+                    <h3>Registrarse</h3>
+                </div>
+                <div class="card-body">
+                <div id="alerta"></div>
+                        <div class="form-group">
+                            <input type="email" name="correo" placeholder="Correo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="codigo" placeholder="Codigo" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="contraseña" placeholder="Contraseña" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="confirm_contraseña" placeholder="Confirmar Contraseña" class="form-control">
+                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block font-weight-bold border-0" style="background-color: #6C3483">Iniciar Sesión</button>
+                    </div>
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -32,32 +32,72 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="col-md-4 mt-5">
-            <div class="card text-center text-light">
-                <form action="/admin/crearElectiva" method="POST">
-                    <div class="card-header">
-                        <h4>Crear Electiva</h4>
-                    </div>
+        <div class="row">
+            <div class="col-md-4 mt-5">
+                <div class="card text-center text-light">
+                    <form action="/admin/electivas" method="POST">
+                        <div class="card-header">
+                            <h4>Crear Electiva</h4>
+                        </div>
 
-                    <div class="card-body">
-                        <div class="form-group">
-                            <input type="text" name="nombreElectiva" placeholder="Nombre Electiva" class="form-control">
+                        <div class="card-body">
+                            <div class="form-group">
+                                
+                                    <input type="text" name="nombre" placeholder="Nombre Electiva" class="form-control">
+                                                                  
+                            </div>
+                            <div class="form-group">
+                            <select name="nombreInstructor" class="form-control">
+                                    <% for(var i = 1; i < profesor.length; i++) { %>
+                                        <option value="<%= profesor[i].nombreProfesor %>"> <%= profesor[i].nombreProfesor %> </option>
+                                    <% } %>
+                            </select> 
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="descripcion" placeholder="Descripcion" colums="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="cupos" placeholder="Numero de cupos" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="descripcion" placeholder="Descripcion" colums="10"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" name="numCupos" placeholder="Numero de cupos" class="form-control">
-                        </div>
-                    </div>
 
-                    <div class="card-footer">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-block text-white font-weight-bold" style="background-color: #6C3483">Crear Electiva</button>
+                        <div class="card-footer">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-block text-white font-weight-bold" style="background-color: #6C3483">Crear Electiva</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+                <div class="col-md-8 mt-5 float-right">
+                    <table class="table text-light table-hover text-center">
+                        <thead>
+                            <tr class="table-dark headings">
+                                <td style="border: 1px solid white;">Nombre</td>
+                                <td style="border: 1px solid white;">Profesor Asociado</td>
+                                <td style="border: 1px solid white;">Descripcion</td>
+                                <td style="border: 1px solid white;">Numero de Cupos</td>
+                                <td style="border: 1px solid white;">Operacion</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 1; i < electiva.length; i++) { 
+                                %>
+                                <tr class="table-light text-dark">
+                                    
+                                    <td style="border: 1px solid black;"><%= electiva[i].nombre %></td>
+                                    <td style="border: 1px solid black;"><%= electiva[i].nombreInstructor %></td>
+                                    <td style="border: 1px solid black;"><%= electiva[i].descripcion %></td>
+                                    <td style="border: 1px solid black;"><%= electiva[i].cupos %></td>
+                                    <td class="boton" style="border: 1px solid black;">
+                                        <a href="/admin/update/electiva/<%= electiva[i]._id %>" class="badge badge-info font-weight-bold">Actualizar</a>
+                                        <a href="/admin/delete/electiva/<%= electiva[i]._id %>" class="badge badge-danger font-weight-bold">Borrar</a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </body>

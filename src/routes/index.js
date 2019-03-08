@@ -52,12 +52,9 @@ router.get('/cerrar', (req, res) => {
     res.redirect('/');
 });
 
-
-
-
 // Crear Profesor
 router.get('/admin/profesor', isAuthenticated, async (req, res) => {
-    const profesor = await Profesor.find()
+    const profesor = await Profesor.find();
     res.render('forms/crearProfesor', {profesor: profesor});
 });
 
@@ -90,13 +87,39 @@ router.post('/admin/profesor/editar/:id', isAuthenticated, async (req, res) => {
 });
 
 // Crear Electivas
-router.get('/admin/electivas', isAuthenticated, (req, res) => {
-    res.render('forms/crearElectivas');
+router.get('/admin/electivas', isAuthenticated, async (req, res) => {
+    const electiva = await Electiva.find();
+    const profesor = await Profesor.find();
+
+    res.render('forms/crearElectivas', {electiva: electiva, profesor: profesor});
 });
 
-router.post('/admin/crearElectiva', isAuthenticated, (req, res) => {
-    console.log(req.body);
-    res.send('received');
+router.post('/admin/electivas', isAuthenticated, async (req, res) => {
+    const nuevaElectiva = new Electiva(req.body);
+    await nuevaElectiva.save();
+    res.redirect('/admin/electiva');
+});
+
+router.post('/admin/delete/electiva/:id', isAuthenticated, async (req, res) => {
+    const { id } = req.params;
+    await Electiva.remove({_id: id});
+    res.redirect('/admin/electiva');
+});
+
+router.get('/admin/update/electiva/:id', isAuthenticated, async (req, res) => {
+    const { id } = req.params;
+    const electiva = await Electiva.findById(id);
+    const profesor = await Profesor.find();
+
+    res.render('forms/editarElectiva', {
+        electiva: electiva, profesor: profesor
+    });
+});
+
+router.post('/admin/update/electiva/:id', isAuthenticated, async (req, res) => {
+    const { id } = req.params;
+    await Electiva.update({_id: id}, req.body);
+    res.redirect('/admin/eletivas');
 });
 
 router.get('/admin/listaEstudiantes', isAuthenticated, (req, res) => {

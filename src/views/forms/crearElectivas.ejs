@@ -48,6 +48,7 @@
                             </div>
                             <div class="form-group">
                             <select name="nombreInstructor" class="form-control">
+                                        <option>Nombre profesor</option>
                                     <% for(var i = 1; i < profesor.length; i++) { %>
                                         <option value="<%= profesor[i].nombreProfesor %>"> <%= profesor[i].nombreProfesor %> </option>
                                     <% } %>
@@ -88,7 +89,9 @@
                                     <td style="border: 1px solid black;"><%= electiva[i].nombre %></td>
                                     <td style="border: 1px solid black;"><%= electiva[i].nombreInstructor %></td>
                                     <td style="border: 1px solid black;"><%= electiva[i].descripcion %></td>
-                                    <td style="border: 1px solid black;"><%= electiva[i].cupos %></td>
+                                    <td style="border: 1px solid black;">
+                                        <span class="badge badge-pill badge-primary"><%= electiva[i].cupos %></span>
+                                    </td>
                                     <td class="boton" style="border: 1px solid black;">
                                         <a href="/admin/update/electiva/<%= electiva[i]._id %>" class="badge badge-info font-weight-bold">Actualizar</a>
                                         <a href="/admin/delete/electiva/<%= electiva[i]._id %>" class="badge badge-danger font-weight-bold">Borrar</a>

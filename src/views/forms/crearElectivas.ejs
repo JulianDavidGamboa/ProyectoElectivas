@@ -28,6 +28,9 @@
         nav-link:hover {
             color: #6C3483;
         }
+        .linkElectiva:hover{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +46,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 
-                                    <input type="text" name="nombre" placeholder="Nombre Electiva" class="form-control">
+                                <input type="text" name="nombre" placeholder="Nombre Electiva" class="form-control">
                                                                   
                             </div>
                             <div class="form-group">
@@ -74,7 +77,9 @@
                     <table class="table text-light table-hover text-center">
                         <thead>
                             <tr class="table-dark headings">
-                                <td style="border: 1px solid white;">Nombre</td>
+                                <td style="border: 1px solid white;">
+                                    Nombre
+                                </td>
                                 <td style="border: 1px solid white;">Profesor Asociado</td>
                                 <td style="border: 1px solid white;">Descripcion</td>
                                 <td style="border: 1px solid white;">Numero de Cupos</td>
@@ -86,7 +91,9 @@
                                 %>
                                 <tr class="table-light text-dark">
                                     
-                                    <td style="border: 1px solid black;"><%= electiva[i].nombre %></td>
+                                    <td style="border: 1px solid black;">
+                                        <a href="#" class="linkElectiva"><%= electiva[i].nombre %> </a>
+                                    </td>
                                     <td style="border: 1px solid black;"><%= electiva[i].nombreInstructor %></td>
                                     <td style="border: 1px solid black;"><%= electiva[i].descripcion %></td>
                                     <td style="border: 1px solid black;">

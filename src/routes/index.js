@@ -4,6 +4,7 @@ const passport = require('passport');
 const User = require('../models/user');
 const Profesor = require('../models/profesor');
 const Electiva = require('../models/electiva');
+require('../config/passport');
 
 router.get('/registro', (req, res) => {
     res.render('forms/registro');
@@ -22,7 +23,7 @@ router.post('/registro', async (req, res) => {
         res.render('/registro');
     } else {
 
-        const correoUsuario = await User.findOne({email: correo});
+        const correoUsuario = await User.findOne({correo: correo});
         if (correoUsuario) {
             req.flash('err_msg', 'Este correo ya existe');
             res.redirect('/registro');
@@ -31,7 +32,7 @@ router.post('/registro', async (req, res) => {
             nuevoUsuario.contraseña = await nuevoUsuario.encryptPassword(contraseña);
             await nuevoUsuario.save();
             req.flash('registro_msg', 'Te has registrado correctamente');
-            res.redirect('/admin/profesor');
+            res.redirect('/inicio');
         }
     }
 });
@@ -41,7 +42,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', passport.authenticate('local', {
-    successRedirect: '/admin/profesor',
+    successRedirect: '/inicio',
     failureRedirect: '/',
     failureFlash: true
 }));
@@ -52,17 +53,29 @@ router.get('/cerrar', (req, res) => {
     res.redirect('/');
 });
 
+// Inicio ( Vista de electivas )
+router.get('/inicio', isAuthenticated, async (req, res) => {
+    const { correo } = req.body;
+    const electiva = await Electiva.find();
+    const usuario = await User.findOne();
+    const correos = await User.find({correo: correo});
+    console.log(this.nuevoUsuario);
+    res.render('forms/inicio', {electiva: electiva, usuario: usuario, usuarios: correos});
+});
+
 // Crear Profesor
 router.get('/admin/profesor', isAuthenticated, async (req, res) => {
     const profesor = await Profesor.find();
-    res.render('forms/crearProfesor', {profesor: profesor});
+    const usuario = await User.find({correo: req.user.correo});
+    res.render('forms/crearProfesor', {profesor: profesor, usuario: usuario});
 });
 
 router.post('/admin/crearProfesor', isAuthenticated, async (req, res) => {
     const nuevoProfesor = new Profesor(req.body);
+    const usuario = await User.find({correo: req.user.correo});
     await nuevoProfesor.save();
     //console.log(nuevoProfesor);
-    res.redirect('/admin/profesor');
+    res.redirect('/admin/profesor', {usuario: usuario});
 });
 
 router.get('/admin/delete/profesor/:id', isAuthenticated, async (req, res) => {
@@ -90,14 +103,16 @@ router.post('/admin/profesor/editar/:id', isAuthenticated, async (req, res) => {
 router.get('/admin/electivas', isAuthenticated, async (req, res) => {
     const electiva = await Electiva.find();
     const profesor = await Profesor.find();
+    const usuario = await User.find({correo: req.user.correo});
 
-    res.render('forms/crearElectivas', {electiva: electiva, profesor: profesor});
+    res.render('forms/crearElectivas', {electiva: electiva, profesor: profesor, usuario: usuario});
 });
 
 router.post('/admin/electivas', isAuthenticated, async (req, res) => {
     const nuevaElectiva = new Electiva(req.body);
+    const usuario = await User.find({correo: req.user.correo});
     await nuevaElectiva.save();
-    res.redirect('/admin/electivas');
+    res.redirect('/admin/electivas', {usuario: usuario});
 });
 
 router.get('/admin/delete/electiva/:id', isAuthenticated, async (req, res) => {
@@ -122,9 +137,7 @@ router.post('/admin/update/electiva/:id', isAuthenticated, async (req, res) => {
     res.redirect('/admin/electivas');
 });
 
-router.get('/admin/listaEstudiantes', isAuthenticated, (req, res) => {
-    res.send('Lista de estudiantes');
-});
+
 
 router.get('/estudiante/listaElectiva', isAuthenticated, (req, res) => {
     res.send('Listado de electivas activas');

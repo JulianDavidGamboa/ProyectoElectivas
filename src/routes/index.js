@@ -56,10 +56,12 @@ router.get('/cerrar', (req, res) => {
 // Inicio ( Vista de electivas )
 router.get('/inicio', isAuthenticated, async (req, res) => {
     const { correo } = req.body;
-    const electiva = await Electiva.find();
+    const electiva = await Electiva.find().sort({date: 'desc'});
     const usuario = await User.findOne();
     const correos = await User.find({correo: correo});
+
     console.log(this.nuevoUsuario);
+
     res.render('forms/inicio', {electiva: electiva, usuario: usuario, usuarios: correos});
 });
 
@@ -70,7 +72,7 @@ router.get('/admin/profesor', isAuthenticated, async (req, res) => {
     res.render('forms/crearProfesor', {profesor: profesor, usuario: usuario});
 });
 
-router.post('/admin/crearProfesor', isAuthenticated, async (req, res) => {
+router.post('/admin/profesor', isAuthenticated, async (req, res) => {
     const nuevoProfesor = new Profesor(req.body);
     const usuario = await User.find({correo: req.user.correo});
     await nuevoProfesor.save();
@@ -112,7 +114,7 @@ router.post('/admin/electivas', isAuthenticated, async (req, res) => {
     const nuevaElectiva = new Electiva(req.body);
     const usuario = await User.find({correo: req.user.correo});
     await nuevaElectiva.save();
-    res.redirect('/admin/electivas', {usuario: usuario});
+    res.redirect('/admin/electivas', {electiva: electiva, usuario: usuario});
 });
 
 router.get('/admin/delete/electiva/:id', isAuthenticated, async (req, res) => {

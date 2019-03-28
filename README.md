@@ -1,20 +1,27 @@
-# ProyectoElectivas
-Proyecto Electivas 
+<h1>Proyecto Electivas</h1>
+<p>Aplicación web simple que le permite a los estudiantes de una universidad elegir sus materias electivas.</p>
+<h3>Pre-requisitos</h3>
+<p>Tener instalado <a href="https://nodejs.org/es/">NodeJS</a> y <a href="https://www.mongodb.com/download-center/community">Mongodb</a></p>
+<br>
+<p>Debes instalar los siguientes modulos:</p>
+<pre>
+  <code>npm install "nombre de los modulos"</code>
+</pre>
+<ul>
+  <li>bcryptjs</li>
+  <li>connect-flash</li>
+  <li>ejs-mate</li>
+  <li>express</li>
+  <li>express-handlebars</li>
+  <li>express-session</li>
+  <li>method-override</li>
+  <li>mongoose</li>
+  <li>passport</li>
+  <li>passport-local</li>
+</ul>
+<p>Y el siguiente como una dependencia:</p>
+<code>npm install "nombre del modulo" -D</code>
+<ul>
+  <li>nodemon</li>
+</ul>
 
-<h3>
-"dependencies": { <br>
-    "bcryptjs": "^2.4.3",<br>
-    "connect-flash": "^0.1.1",<br>
-    "ejs-mate": "^3.0.0",<br>
-    "express": "^4.16.4",<br>
-    "express-handlebars": "^3.0.2",<br>
-    "express-session": "^1.15.6",<br>
-    "method-override": "^3.0.0",<br>
-    "mongoose": "^5.4.17",<br>
-    "passport": "^0.4.0",<br>
-    "passport-local": "^1.0.0"<br>
-  },<br>
-  "devDependencies": {<br>
-    "nodemon": "^1.18.10"<br>
-  }
-</h3>

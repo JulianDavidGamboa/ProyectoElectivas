@@ -24,4 +24,12 @@
 <ul>
   <li>nodemon</li>
 </ul>
-
+<p>Para ejecutar el proyecto necesita hacer lo siguiente en la terminal o consola:</p>
+<p>Activar el servicio de mongo:</p>
+<pre>
+  <code>mongod</code>
+</pre>
+<p>Activar el servidor de node:</p>
+<pre>
+  <code>npm run dev</code>
+</pre>
